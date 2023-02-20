@@ -47,9 +47,15 @@ class TapItem:
         if not self.price:
             self.price = '--'
 
+    def repr_necessary_data(self):
+        repr_dict = self.__dict__
+        for e in ['position', 'containers']:
+            repr_dict.pop(e)
+        return repr_dict
+
 
 @dataclass
-class Section(Dict):
+class Section:
     id: int
     menu_id: int
     position: int
@@ -59,7 +65,7 @@ class Section(Dict):
     public: bool
     created_at: datetime
     updated_at: datetime
-    items: list[TapItem]
+    items: List[TapItem]
 
 
 @dataclass
@@ -79,22 +85,6 @@ class Menu(List):
     on_deck_section: Section
     description: Optional[str] = None
     footer: Optional[str] = None
-
-    def get_section(self):
-
-        def parse_names(names_list):
-            for name in names_list:
-                if name in dict_of_beers.keys():
-                    dict_of_beers[name] += 1
-                else:
-                    dict_of_beers[name] = 1
-            return dict_of_beers
-
-        dict_of_beers = {}
-        for section in self.sections:
-            names = section['name'].replace(' ', '').split('/')
-            dict_of_beers = parse_names(names)
-        return dict_of_beers
 
 
 @dataclass
