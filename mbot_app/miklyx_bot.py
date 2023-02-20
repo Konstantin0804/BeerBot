@@ -7,7 +7,6 @@ from service.get_from_db import get_tap, get_bottle, \
     toggle_subscription, add_contact, add_address, add_to_cart, \
     delete_from_cart, checkout_cart, deactivate_cart, find_id, find_photo, cart_customer
 import service.settings as settings
-# from app import settings
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,

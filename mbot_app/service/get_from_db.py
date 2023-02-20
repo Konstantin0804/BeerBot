@@ -12,21 +12,21 @@ def get_tap():
 
 
 def get_bottle():
-    sections_bottle = db.bottles.find_one({"act_flg": 1})
+    sections_bottle = db.bottles.find_one({"act_flg": 1})["menu"]
+    sections_bottle = db_models.Menu(**sections_bottle).__dict__
     ks = ['id', 'name', 'style', 'brewery', 'abv', 'ibu', 'label_image_hd']
     bottles = dict()
-    bottles['id'] = sections_bottle['menu']['id']
-    bottles['name'] = sections_bottle['menu']['name']
-    for i in range(len(sections_bottle['menu']['sections'])):
+    bottles['id'] = sections_bottle['id']
+    bottles['name'] = sections_bottle['name']
+    for i in range(len(sections_bottle['sections'])):
         bottles[f'bottle_info_{i}'] = dict()
-        i_item = sections_bottle['menu']['sections'][i]
+        i_item = sections_bottle['sections'][i]
         bottles[f'bottle_info_{i}']['bottle_name'] = i_item['name']
         for j in range(len(i_item['items'])):
             j_item = i_item['items'][j]
-            # print(j_item.keys())
-            bottles[f'bottle_info_{i}'][f'bottle_item_{j}'] = {key: j_item[key] for key in ks }
-            bottles[f'bottle_info_{i}'][f'bottle_item_{j}']['price'] = j_item['containers'][0]['price']
-            # bottles[f'bottle_info_{i}'][f'bottle_item'] = {key: j_item[key] for key in ks }
+            if len(j_item['containers']) > 0:
+                bottles[f'bottle_info_{i}'][f'bottle_item_{j}'] = {key: j_item[key] for key in ks }
+                bottles[f'bottle_info_{i}'][f'bottle_item_{j}']['price'] = j_item['containers'][0]['price']
     return bottles
 
 
@@ -185,4 +185,4 @@ def deactivate_cart(user_data, user_text):
 
 
 if __name__ == '__main__':
-    get_tap()
+    get_bottle()
