@@ -185,3 +185,661 @@ telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 43, in taps
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
+TypeError: __init__() got multiple values for argument 'resize_keyboard'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 43, in taps
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
+TypeError: __init__() got multiple values for argument 'resize_keyboard'
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 43, in taps
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
+TypeError: __init__() got multiple values for argument 'resize_keyboard'
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 43, in taps
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
+TypeError: __init__() got multiple values for argument 'resize_keyboard'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 49, in taps
+    about = text[i]['name']+', Стиль: '+text[i]['style']+', Пивоварня: '+text[i]['brewery']+', ABV: '+text[i]['abv']+', IBU: '+text[i]['ibu']+'\n'+'Цена: '+text[i]['price']
+TypeError: can only concatenate str (not "NoneType") to str
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 45, in taps
+    for i in range(text):
+TypeError: 'list' object cannot be interpreted as an integer
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 45, in taps
+    for i in range(text):
+TypeError: 'list' object cannot be interpreted as an integer
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 46, in taps
+    about = text[i]['name']+', Стиль: '+text[i]['style']+', Пивоварня: '+text[i]['brewery']+', ABV: '+text[i]['abv']+', IBU: '+text[i]['ibu']+'\n'+'Цена: '+text[i]['price']
+TypeError: can only concatenate str (not "NoneType") to str
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 46, in taps
+    about = text[i]['name']+', Стиль: '+text[i]['style']+', Пивоварня: '+text[i]['brewery']+', ABV: '+text[i]['abv']+', IBU: '+text[i]['ibu']+'\n'+'Цена: '+text[i]['price']
+TypeError: can only concatenate str (not "NoneType") to str
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 48, in taps
+    update.message.reply_text(reply_markup=menu_keyboard)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/message.py", line 478, in reply_text
+    return self.bot.send_message(self.chat_id, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+TypeError: send_message() missing 1 required positional argument: 'text'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 145, in bottles_section
+    update.message.reply_text(reply_markup=menu_keyboard)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/message.py", line 478, in reply_text
+    return self.bot.send_message(self.chat_id, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+TypeError: send_message() missing 1 required positional argument: 'text'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - ERROR - Error while getting Updates: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 332, in _network_loop_retry
+    if not action_cb():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/updater.py", line 291, in polling_action_cb
+    updates = self.bot.get_updates(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 1982, in get_updates
+    result = self._request.post(url, data, timeout=float(read_latency) + float(timeout))
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 324, in post
+    result = self._request_wrapper('POST', url,
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/utils/request.py", line 242, in _request_wrapper
+    raise Conflict(message)
+telegram.error.Conflict: Conflict: terminated by other getUpdates request; make sure that only one bot instance is running
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 142, in bottles_section
+    update.message.reply_text(reply_markup=menu_keyboard)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/message.py", line 478, in reply_text
+    return self.bot.send_message(self.chat_id, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+TypeError: send_message() missing 1 required positional argument: 'text'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 135, in bottles_section
+    result = text['bottle_name'].get(sect[1:].replace(' ', ''))
+KeyError: 'bottle_name'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...

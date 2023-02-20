@@ -39,13 +39,9 @@ def beer(bot, update, user_data):
 
 def taps(bot, update, user_data):
     text = get_tap()
-    print(text)
-    menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива','Корзина'],['В начало']], resize_keyboard=True, one_time_keyboard=True)
     add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='1')]])
-    for i in range(19):
-        # update.message.reply_text(text[i], reply_markup=add_keyboard)
-        # update.callback_query['caption_id'] = text[i]['id']
-        # print(update)
+    for i in range(len(text)):
         about = text[i]['name']+', Стиль: '+text[i]['style']+', Пивоварня: '+text[i]['brewery']+', ABV: '+text[i]['abv']+', IBU: '+text[i]['ibu']+'\n'+'Цена: '+text[i]['price']
         update.message.reply_photo(text[i]['label_image_hd'], about, reply_markup=add_keyboard)
     update.message.reply_text(reply_markup=menu_keyboard)
@@ -126,11 +122,10 @@ def bottles_root(bot, update, user_data):
 
 
 def bottles_section(bot, update, user_data):
-    sect = get_bottles_section(update)
+    sect = update.message.text
     text = get_bottle()
     text.pop('id')
     text.pop('name')
-    k = ''
     menu_keyboard = ReplyKeyboardMarkup([['К разделам бутылок', 'Корзина'],['К корню пива', 'В начало']], resize_keyboard=True, one_time_keyboard=True)
     add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='3')]])
     for i in text.values():
@@ -140,19 +135,10 @@ def bottles_section(bot, update, user_data):
         if k['bottle_name'] == sect[1:]:
             k.pop("bottle_name")
             for j in k.values():
-                # print(j)
                 about = j['name']+', Стиль: '+j['style']+', Пивоварня: '+j['brewery']+', ABV: '+j['abv']+', IBU: '+j['ibu']+'\n'+'Цена: '+j['price']
                 update.message.reply_photo(j['label_image_hd'],about, reply_markup=add_keyboard)
             break
-    sect = ''
-    text = ''
     update.message.reply_text(reply_markup=menu_keyboard)
-
-
-def get_bottles_section(update):
-    bottle_sect = update['message']['text']
-    return bottle_sect
-
 
 
 def registration(bot, update, user_data):

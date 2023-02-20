@@ -44,6 +44,8 @@ class TapItem:
             self.price = self.containers[0]['price']
         except IndexError:
             self.price = '0.0'
+        if not self.price:
+            self.price = '--'
 
 
 @dataclass
