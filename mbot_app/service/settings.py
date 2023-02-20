@@ -1,16 +1,17 @@
-from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 PROXY = {'proxy_url': 'socks5://t1.learn.python.ru:1080',
-    'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'
-    }
-}
+         'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'
+                                  }
+         }
 
-API_KEY = "6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ"
+API_KEY = os.getenv("API_KEY")
 
-HEADERS = {'Content-Type': 'application/json', 'Authorization': 'Basic SEVMTE9ATUVUSE9EQkVFUi5SVTpYRmt2TXJyZzRVYkZLeXhXaXBVdw=='}
+HEADERS = {'Content-Type': 'application/json', 'Authorization': 'Basic '
+                                                                'SEVMTE9ATUVUSE9EQkVFUi5SVTpYRmt2TXJyZzRVYkZLeXhXaXBVdw=='}
 
-DB_PASSWORD = "qwerty%5"
-DB_USER = "mbot"
-
-db = MongoClient("mongodb+srv://mbottest-z04wi.gcp.mongodb.net/test", username=DB_USER, password=DB_PASSWORD).mbot_base
-
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_USER = os.getenv("DB_USER")

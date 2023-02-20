@@ -170,3 +170,18 @@ Traceback (most recent call last):
     menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
 TypeError: __init__() got multiple values for argument 'resize_keyboard'
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 118, in bottles_root
+    text = get_bottle()
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 28, in get_bottle
+    bottles[f'bottle_info_{i}'][f'bottle_item_{j}']['price'] = j_item['containers'][0]['price']
+IndexError: list index out of range
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...

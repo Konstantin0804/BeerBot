@@ -1,9 +1,10 @@
-webtest
-requests
+webtest~=3.0.0
+requests~=2.28.2
 gunicorn
-Werkzeug
-pymongo
+Werkzeug~=2.2.3
+pymongo~=4.3.3
 dnspython
 pysocks
 python-telegram-bot==12.0
-telegram
+telegram~=0.0.1
+python-dotenv~=0.21.1
