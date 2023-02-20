@@ -1,0 +1,172 @@
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x10372f610>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot1007684944:AAHyQ5_tF2_qer8lWGyWytHILaAOf5uYT_8/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x10372f910>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot1007684944:AAHyQ5_tF2_qer8lWGyWytHILaAOf5uYT_8/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x10375db20>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot1007684944:AAHyQ5_tF2_qer8lWGyWytHILaAOf5uYT_8/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x10239a610>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x10239a910>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x10239ae80>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x102bc56a0>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x102bc57c0>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x102be35e0>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=2, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x106ec7f40>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=1, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x106ede5b0>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.vendor.ptb_urllib3.urllib3.connectionpool - WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<telegram.vendor.ptb_urllib3.urllib3.contrib.socks.SOCKSHTTPSConnection object at 0x106ede6a0>: Failed to establish a new connection: 0x01: General SOCKS server failure')': /bot6056645493:AAF_wNP3RDXygUAZreqWePS90wuHUcJHNpQ/getMe
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 42, in taps
+    text = get_tap()
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 7, in get_tap
+    sections_tap = db.taps.find_one({'act_flg': 1})["menu"]["sections"][0]["items"]
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/collection.py", line 1459, in find_one
+    for result in cursor.limit(-1):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1248, in next
+    if len(self.__data) or self._refresh():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1165, in _refresh
+    self.__send_message(q)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1052, in __send_message
+    response = client._run_operation(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 105, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1330, in _run_operation
+    return self._retryable_read(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 105, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1442, in _retryable_read
+    with self._socket_from_server(read_pref, server, session) as (sock_info, read_pref):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 117, in __enter__
+    return next(self.gen)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1282, in _socket_from_server
+    with self._get_socket(server, session) as sock_info:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 117, in __enter__
+    return next(self.gen)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1217, in _get_socket
+    with server.get_socket(handler=err_handler) as sock_info:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 117, in __enter__
+    return next(self.gen)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 1407, in get_socket
+    sock_info = self._get_socket(handler=handler)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 1520, in _get_socket
+    sock_info = self.connect(handler=handler)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 1378, in connect
+    sock_info.authenticate()
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 870, in authenticate
+    auth.authenticate(creds, self)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/auth.py", line 549, in authenticate
+    auth_func(credentials, sock_info)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/auth.py", line 475, in _authenticate_default
+    return _authenticate_scram(credentials, sock_info, "SCRAM-SHA-1")
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/auth.py", line 241, in _authenticate_scram
+    res = sock_info.command(source, cmd)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 767, in command
+    return command(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/network.py", line 166, in command
+    helpers._check_command_response(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 181, in _check_command_response
+    raise OperationFailure(errmsg, code, response, max_wire_version)
+pymongo.errors.OperationFailure: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 114, in bottles_root
+    text = get_bottle()
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 20, in get_bottle
+    sections_bottle = db.bottles.find_one({"act_flg": 1})
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/collection.py", line 1459, in find_one
+    for result in cursor.limit(-1):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1248, in next
+    if len(self.__data) or self._refresh():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1165, in _refresh
+    self.__send_message(q)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1052, in __send_message
+    response = client._run_operation(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 105, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1330, in _run_operation
+    return self._retryable_read(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 105, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1442, in _retryable_read
+    with self._socket_from_server(read_pref, server, session) as (sock_info, read_pref):
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 117, in __enter__
+    return next(self.gen)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1282, in _socket_from_server
+    with self._get_socket(server, session) as sock_info:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 117, in __enter__
+    return next(self.gen)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1217, in _get_socket
+    with server.get_socket(handler=err_handler) as sock_info:
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/contextlib.py", line 117, in __enter__
+    return next(self.gen)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 1407, in get_socket
+    sock_info = self._get_socket(handler=handler)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 1520, in _get_socket
+    sock_info = self.connect(handler=handler)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 1378, in connect
+    sock_info.authenticate()
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 870, in authenticate
+    auth.authenticate(creds, self)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/auth.py", line 549, in authenticate
+    auth_func(credentials, sock_info)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/auth.py", line 475, in _authenticate_default
+    return _authenticate_scram(credentials, sock_info, "SCRAM-SHA-1")
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/auth.py", line 241, in _authenticate_scram
+    res = sock_info.command(source, cmd)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/pool.py", line 767, in command
+    return command(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/network.py", line 166, in command
+    helpers._check_command_response(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 181, in _check_command_response
+    raise OperationFailure(errmsg, code, response, max_wire_version)
+pymongo.errors.OperationFailure: bad auth : authentication failed, full error: {'ok': 0, 'errmsg': 'bad auth : authentication failed', 'code': 8000, 'codeName': 'AtlasError'}
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 42, in taps
+    text = get_tap()
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 14, in get_tap
+    taps[k]["price"] = j["containers"][0]["price"]
+IndexError: list index out of range
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 42, in taps
+    text = get_tap()
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 15, in get_tap
+    taps[k]["price"] = j["containers"][0]["price"]
+IndexError: list index out of range
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 43, in taps
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
+TypeError: __init__() got multiple values for argument 'resize_keyboard'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 44, in taps
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива'],['Корзина']],[['В начало']], resize_keyboard=True, one_time_keyboard=True)
+TypeError: __init__() got multiple values for argument 'resize_keyboard'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...

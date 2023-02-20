@@ -1,0 +1,9 @@
+webtest
+requests
+gunicorn
+Werkzeug
+pymongo
+dnspython
+pysocks
+python-telegram-bot==12.0
+telegram
