@@ -1,3 +1,5 @@
+import datetime
+
 from mbot_app.datasource.db import db
 from mbot_app.models import db_models
 
@@ -24,7 +26,7 @@ def get_bottle():
         for j in range(len(i_item.items)):
             j_item = i_item.items[j]
             if len(j_item.containers) > 0:
-                bottles[f'bottle_info_{i}'][f'bottle_item_{j}'] = j_item.repr_necessary_data
+                bottles[f'bottle_info_{i}'][f'bottle_item_{j}'] = j_item.repr_necessary_data()
     return bottles
 
 
@@ -71,30 +73,55 @@ def add_address(user_data, address):
     )
 
 
+def sort_active_carts(carts: list):
+    some_instances = []
+    for cart in carts:
+        cart_obj = db_models.Cart.from_dict(cart)
+        some_instances.append(cart_obj)
+    some_instances = sorted(some_instances, key=lambda x: x.cart_open)
+    return some_instances[0]
+
+
 def add_to_cart(user_id, beer_id):
     beer_id = str(beer_id)
-    if db.carts.find_one({'user_id': user_id, 'active_flag': 1}):
-        user_cart = get_cart_by_user_id(user_id)
-        user_cart[beer_id] = user_cart.get(beer_id, 0) + 1
-        db.carts.update_one({'user_id': user_id, 'active_flag': 1}, {'$set': {'cart': user_cart}})
-        count = user_cart.get(beer_id)
+    opened_carts = get_carts_by_user_id(user_id)
+    if len(opened_carts) != 0:
+        latest_cart = sort_active_carts(opened_carts)
+        if not latest_cart.cart.get(beer_id):
+            latest_cart.cart[beer_id] = 1
+        else:
+            latest_cart.cart[beer_id] += 1
+        db.carts.update_one({'user_id': user_id.id, 'active_flag': 1, '_id': latest_cart._id},
+                            {'$set': {'cart': latest_cart.cart}})
+        count = latest_cart.cart.get(beer_id)
     else:
-        db.carts.insert_one({'user_id': user_id, 'active_flag': 1, 'cart': {beer_id: 1}})
+        new_cart = db_models.Cart(
+            user_id=user_id.id,
+            active_flag=1,
+            cart={beer_id: 1}
+        )
+        db.carts.insert_one(new_cart.__dict__)
         count = 1
     return count
 
 
 def delete_from_cart(user_id, beer_id):
     beer_id = str(beer_id)
-    user_cart = get_cart_by_user_id(user_id)
-    user_cart[beer_id] = user_cart.get(beer_id, 0) - 1
-    db.carts.update_one({'user_id': user_id, 'active_flag': 1}, {'$set': {'cart': user_cart}})
-    count = user_cart.get(beer_id, 0)
-    return count
+    user_carts = get_carts_by_user_id(user_id)
+    if len(user_carts) != 0:
+        selected_cart = sort_active_carts(user_carts)
+        if not selected_cart.cart.get(beer_id):
+            return 0
+        else:
+            selected_cart.cart[beer_id] -= 1
+        db.carts.update_one({'user_id': user_id.id, 'active_flag': 1, '_id': selected_cart._id},
+                            {'$set': {'cart': selected_cart.cart}})
+        count = selected_cart.cart[beer_id]
+        return count
 
 
-def get_cart_by_user_id(user_id=None):
-    return db.carts.find_one({'user_id': user_id, 'active_flag': 1})['cart']
+def get_carts_by_user_id(user_id):
+    return list(db.carts.find({'user_id': user_id.id, 'active_flag': 1}))
 
 
 def find_user_is_registered(user_id):
@@ -102,29 +129,18 @@ def find_user_is_registered(user_id):
 
 
 def find_id(str_checkout, type_val):
-    # print('find ',str_checkout)
-    # print('find ',type_val)
-    taps = db.taps.find_one({'act_flg':1})
-    bottles = db.bottles.find_one({'act_flg':1})
-    # print('bottles: ', bottles)
     name = str_checkout.split(', Стиль: ')[0]
     brewery = str_checkout.split(', Стиль: ')[1].split(', Пивоварня: ')[1].split(', ABV')[0]
-    style = str_checkout.split('Стиль: ')[1].split(',')[0]
-    tap_id = ''
-    bot_id = ''
-    if type_val == 'tap':
-        for i in taps['menu']['sections'][0]['items']:
-            # print(i['name'])
-            if i['name'] == name and i['brewery'] == brewery:
-                tap_id = i['id']
-        return tap_id
+    # style = str_checkout.split('Стиль: ')[1].split(',')[0]
+    if type_val == 'bottle':
+        bottles = db.bottles.find_one({'act_flg': 1})
+        bottle_menu = db_models.Menu(**bottles['menu'])
+        found_beer = bottle_menu.find_beer_in_sections(name, brewery)
     else:
-        # print('sectionssss:   ', bottles['menu']['sections'])
-        for i in bottles['menu']['sections']:
-            for j in i['items']:
-                if j['name'] == name and j['brewery'] == brewery:
-                    bot_id = j['id']
-        return bot_id
+        taps = db.taps.find_one({'act_flg': 1})
+        tap_menu = db_models.Menu(**taps['menu'])
+        found_beer = tap_menu.find_tap_beer_in_sections(name, brewery)
+    return found_beer
 
 
 def find_photo(str_checkout, type_val):
@@ -152,8 +168,10 @@ def find_photo(str_checkout, type_val):
         return photo
 
 
-def checkout_cart(user_data, user_text):
-    current_cart = db.carts.find_one({'user_id': user_data['id'], 'active_flag':1})
+def checkout_cart(user_data):
+    current_cart = list(db.carts.find({'user_id': user_data['id'], 'active_flag': 1}))
+    if not current_cart:
+        return None
     # print(customer_data)
     taps = get_tap()
     bottles = get_bottle()

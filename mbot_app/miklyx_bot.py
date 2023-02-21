@@ -52,7 +52,6 @@ def taps(bot, update, user_data):
 
 def add_button(bot, update, user_data):
     query = update.callback_query
-    # print('add_button: ', query)
     if query.data == '1':
         t_id = find_id(query.message.caption, 'tap')
         c = add_to_cart(update.effective_user, t_id)
@@ -62,7 +61,6 @@ def add_button(bot, update, user_data):
         bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
     elif query.data == '3':
         t_id = find_id(query.message.caption, 'bottle')
-        # print(t_id)
         c = add_to_cart(update.effective_user, t_id)
         add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='3'),
                                             InlineKeyboardButton(text="Убрать", callback_data='4')]])
@@ -181,22 +179,26 @@ def start_address(bot, update, user_data):
 
 
 def cart(bot, update, user_data):
-    cart = checkout_cart(update.effective_user, update.effective_user)
-    menu_keyboard = ReplyKeyboardMarkup([['В начало', ' Заказать']], resize_keyboard=True, one_time_keyboard=True)
-    #  print(cart)
-    for i in cart.values():
-        # print(i)
-        cart_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(i['c'])+')', callback_data='5'),
-                                            InlineKeyboardButton(text="Убрать", callback_data='6')]])
-        # update.message.reply_text(i, reply_markup=cart_keyboard)
-        about = i['name']+', Стиль: '+i['style']+', Пивоварня: '+i['brewery']+', ABV: '+i['abv']+', IBU: '+i['ibu']+'\n'+'Цена: '+i['price']
-        update.message.reply_photo(i['label_image_hd'], about, reply_markup= cart_keyboard)
-    # update.message.reply_text('Chooooose', reply_markup=add_keyboard)
-    update.message.reply_text('Ваш заказ', reply_markup=menu_keyboard)
+    current_cart = checkout_cart(update.effective_user)
+    if not current_cart:
+        menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text('У вас нет активных заказов.', reply_markup=menu_keyboard)
+    else:
+        menu_keyboard = ReplyKeyboardMarkup([['В начало', ' Заказать']], resize_keyboard=True, one_time_keyboard=True)
+        #  print(cart)
+        for i in current_cart.values():
+            # print(i)
+            cart_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(i['c'])+')', callback_data='5'),
+                                                InlineKeyboardButton(text="Убрать", callback_data='6')]])
+            # update.message.reply_text(i, reply_markup=cart_keyboard)
+            about = i['name']+', Стиль: '+i['style']+', Пивоварня: '+i['brewery']+', ABV: '+i['abv']+', IBU: '+i['ibu']+'\n'+'Цена: '+i['price']
+            update.message.reply_photo(i['label_image_hd'], about, reply_markup= cart_keyboard)
+        # update.message.reply_text('Chooooose', reply_markup=add_keyboard)
+        update.message.reply_text('Ваш заказ', reply_markup=menu_keyboard)
 
 
 def checkout(bot, update, user_data):
-    cart = checkout_cart(update.effective_user, update.effective_user)
+    cart = checkout_cart(update.effective_user)
     customer = cart_customer(update.effective_user, update.effective_user)
     out = ''
     # print(cart)

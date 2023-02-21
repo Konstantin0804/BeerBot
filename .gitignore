@@ -2,3 +2,4 @@
 .idea
 venv
 *.env
+mbot_app/bot.log

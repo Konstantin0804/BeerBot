@@ -57,6 +57,12 @@ class TapItem:
             repr_dict.pop(e)
         return repr_dict
 
+    def find_beer(self, beer_name, beer_brewery):
+        if self.name == beer_name and self.brewery == beer_brewery:
+            return self.id
+        else:
+            return None
+
 
 @dataclass
 class Section:
@@ -83,6 +89,13 @@ class Section:
         for item in self.items:
             all_items.append(TapItem.from_dict(item))
         self.items = all_items
+
+    def find_beer_in_items(self, beer_name, beer_brewery):
+        for item in self.items:
+            found_beer = item.find_beer(beer_name, beer_brewery)
+            if found_beer:
+                return found_beer
+        return None
 
 
 @dataclass
@@ -117,6 +130,19 @@ class Menu:
             all_sections.append(Section(**section))
         self.sections = all_sections
 
+    def find_beer_in_sections(self, beer_name, beer_brewery):
+        for section in self.sections:
+            found_beer = section.find_beer_in_items(beer_name, beer_brewery)
+            if found_beer:
+                return found_beer
+        return None
+
+    def find_tap_beer_in_sections(self, beer_name, beer_brewery):
+        found_beer = self.sections[0].find_beer_in_items(beer_name, beer_brewery)
+        if found_beer:
+            return found_beer
+        return None
+
 
 @dataclass
 class Tap:
@@ -138,3 +164,23 @@ class User:
     last_nameL: Optional[str] = None
     contacts: Optional[str] = None
     address: Optional[str] = None
+
+
+@dataclass
+class Cart:
+    user_id: int
+    cart: dict
+    _id: int = field(default=None, init=False)
+    active_flag: int = field(default=None)
+    cart_open: datetime = field(default=None, init=False)
+    cart_closed: datetime = field(default=None)
+
+    def __post_init__(self):
+        self.cart_open = datetime.now().strftime("%Y-%m-%d %H:%M:%S") if not self.cart_open else self.cart_open
+
+    @classmethod
+    def from_dict(cls, env):
+        return cls(**{
+            k: v for k, v in env.items()
+            if k in inspect.signature(cls).parameters
+        })
