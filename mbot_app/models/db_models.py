@@ -1,6 +1,7 @@
 from datetime import datetime
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional
+from bson import ObjectId
 import inspect
 
 
@@ -161,7 +162,7 @@ class User:
     chat_id: int
     username: Optional[str] = None
     first_name: Optional[str] = None
-    last_nameL: Optional[str] = None
+    last_name: Optional[str] = None
     contacts: Optional[str] = None
     address: Optional[str] = None
 
@@ -170,9 +171,8 @@ class User:
 class Cart:
     user_id: int
     cart: dict
-    _id: int = field(default=None, init=False)
-    active_flag: int = field(default=None)
-    cart_open: datetime = field(default=None, init=False)
+    active_flag: int = field(default=1)
+    cart_open: datetime = field(default=None)
     cart_closed: datetime = field(default=None)
 
     def __post_init__(self):

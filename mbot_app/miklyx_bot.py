@@ -193,24 +193,27 @@ def cart(bot, update, user_data):
 
 
 def checkout(bot, update, user_data):
-    cart = checkout_cart(update.effective_user)
-    customer = cart_customer(update.effective_user, update.effective_user)
-    out = ''
-    # print(cart)
-    k = 0
-    for i in cart.values():
-        out = out + 'Наименование: '+str(i['name'])+', '+'количество: '+str(i['c'])+', '+'цена: '+str(i['price'])+', итого = '+str(int(i['c'])*float(i['price'])) + '\n'
-        k = k + int(i['c'])*float(i['price'])
-    out = out + '\n' + ' Итого: ' + str(k) + ' \n Заказчик: ' + str(customer['first_name'])+ ' '+ str(customer['last_name']) + ' ник: '+ str(customer['username']) + ' телефон: ' + str(customer['contacts']) + '\n адрес: ' + str(customer['address'])
-    # print(k)
-    # print(out)
-    # print(customer['username'])
-    if customer['contacts'] and customer['address']:
-        bot.send_message(chat_id=129058202, text=out)
-        deactivate_cart(update.effective_user, update.effective_user)
+    cart_for_checkout = checkout_cart(update.effective_user)
+    if not cart_for_checkout:
+        menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text('У вас нет активных заказов.', reply_markup=menu_keyboard)
     else:
-        menu_keyboard = ReplyKeyboardMarkup([['В начало', 'Регистрация']], resize_keyboard=True, one_time_keyboard=True)
-        update.message.reply_text('Введите контактные данные по кнопке "Регистрация"', reply_markup=menu_keyboard)
+        customer = find_user_is_registered(update.effective_user.id)
+        out = ''
+        k = 0
+        for i in cart_for_checkout.values():
+            if not i['price']:
+                i['price'] = 0
+            out = out + 'Наименование: '+str(i['name'])+', '+'количество: '+str(i['c'])+', '+'цена: '+str(i['price'])+', итого = '+str(int(i['c'])*float(i['price'])) + '\n'
+            k = k + int(i['c'])*float(i['price'])
+        out = out + '\n' + 'Итого: ' + str(k) + '\n Заказчик: ' + str(customer['first_name'])+ ' '+ str(customer['last_name']) + '\n ник: '+ str(customer['username']) + '\n телефон: ' + str(customer['contacts']) + '\n адрес: ' + str(customer['address'])
+        if customer['contacts'] and customer['address']:
+            #bot.send_message(chat_id=129058202, text=out)
+            bot.send_message(chat_id=customer['chat_id'], text=out)
+            deactivate_cart(update.effective_user)
+        else:
+            menu_keyboard = ReplyKeyboardMarkup([['В начало', 'Регистрация']], resize_keyboard=True, one_time_keyboard=True)
+            update.message.reply_text('Введите контактные данные по кнопке "Регистрация"', reply_markup=menu_keyboard)
 
 
 def main():

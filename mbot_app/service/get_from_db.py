@@ -73,27 +73,17 @@ def add_address(user_data, address):
     )
 
 
-def sort_active_carts(carts: list):
-    some_instances = []
-    for cart in carts:
-        cart_obj = db_models.Cart.from_dict(cart)
-        some_instances.append(cart_obj)
-    some_instances = sorted(some_instances, key=lambda x: x.cart_open)
-    return some_instances[0]
-
-
 def add_to_cart(user_id, beer_id):
     beer_id = str(beer_id)
-    opened_carts = get_carts_by_user_id(user_id)
-    if len(opened_carts) != 0:
-        latest_cart = sort_active_carts(opened_carts)
-        if not latest_cart.cart.get(beer_id):
-            latest_cart.cart[beer_id] = 1
+    opened_cart = get_cart_by_user_id(user_id)
+    if opened_cart:
+        if not opened_cart.cart.get(beer_id):
+            opened_cart.cart[beer_id] = 1
         else:
-            latest_cart.cart[beer_id] += 1
-        db.carts.update_one({'user_id': user_id.id, 'active_flag': 1, '_id': latest_cart._id},
-                            {'$set': {'cart': latest_cart.cart}})
-        count = latest_cart.cart.get(beer_id)
+            opened_cart.cart[beer_id] += 1
+        db.carts.update_one({'user_id': user_id.id, 'active_flag': 1},
+                            {'$set': {'cart': opened_cart.cart}})
+        count = opened_cart.cart.get(beer_id)
     else:
         new_cart = db_models.Cart(
             user_id=user_id.id,
@@ -107,21 +97,24 @@ def add_to_cart(user_id, beer_id):
 
 def delete_from_cart(user_id, beer_id):
     beer_id = str(beer_id)
-    user_carts = get_carts_by_user_id(user_id)
-    if len(user_carts) != 0:
-        selected_cart = sort_active_carts(user_carts)
-        if not selected_cart.cart.get(beer_id):
+    user_cart = get_cart_by_user_id(user_id)
+    if user_cart:
+        if not user_cart.cart.get(beer_id):
             return 0
         else:
-            selected_cart.cart[beer_id] -= 1
-        db.carts.update_one({'user_id': user_id.id, 'active_flag': 1, '_id': selected_cart._id},
-                            {'$set': {'cart': selected_cart.cart}})
-        count = selected_cart.cart[beer_id]
+            user_cart.cart[beer_id] -= 1
+        db.carts.update_one({'user_id': user_id.id, 'active_flag': 1},
+                            {'$set': {'cart': user_cart.cart}})
+        count = user_cart.cart[beer_id]
         return count
 
 
-def get_carts_by_user_id(user_id):
-    return list(db.carts.find({'user_id': user_id.id, 'active_flag': 1}))
+def get_cart_by_user_id(user_id):
+    cart_dict = db.carts.find_one({'user_id': user_id.id, 'active_flag': 1})
+    if not cart_dict:
+        return None
+    cart = db_models.Cart.from_dict(cart_dict)
+    return cart
 
 
 def find_user_is_registered(user_id):
@@ -169,28 +162,25 @@ def find_photo(str_checkout, type_val):
 
 
 def checkout_cart(user_data):
-    current_carts = list(db.carts.find({'user_id': user_data['id'], 'active_flag': 1}))
-    if not current_carts:
-        return None
-    selected_cart = sort_active_carts(current_carts).__dict__
+    selected_cart = get_cart_by_user_id(user_data)
     taps = get_tap()
     bottles = get_bottle()
     checkout = dict()
-    for j in selected_cart['cart']:
+    for j in selected_cart.cart:
         for i in taps:
             if i['id'] == int(j):
                 checkout[i['id']] = i
-                checkout[i['id']]['c'] = selected_cart['cart'][j]
+                checkout[i['id']]['c'] = selected_cart.cart[j]
     bottles.pop('id')
     bottles.pop('name')
     for i in bottles.values():
         i.pop('bottle_name')
-    for j in selected_cart['cart']:
+    for j in selected_cart.cart:
         for i in bottles.values():
             for k in i.values():
                 if k['id'] == int(j):
                     checkout[k['id']] = k
-                    checkout[k['id']]['c'] = selected_cart['cart'][j]
+                    checkout[k['id']]['c'] = selected_cart.cart[j]
     return checkout
 
 
@@ -199,8 +189,8 @@ def cart_customer(user_data, user_text):
     return customer_data
 
 
-def deactivate_cart(user_data, user_text):
-    db.carts.update_one({'user_id': user_data['id'],'active_flag': 1},{'$set': {'active_flag' :0}})
+def deactivate_cart(user_data):
+    db.carts.update_one({'user_id': user_data['id'], 'active_flag': 1}, {'$set': {'active_flag': 0}})
 
 
 if __name__ == '__main__':
