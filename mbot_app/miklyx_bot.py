@@ -5,7 +5,8 @@ from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, \
     InlineKeyboardButton, KeyboardButton, ReplyKeyboardRemove
 from service.get_from_db import get_tap, get_bottle, \
     toggle_subscription, add_contact, add_address, add_to_cart, \
-    delete_from_cart, checkout_cart, deactivate_cart, find_id, find_photo, cart_customer
+    delete_from_cart, checkout_cart, deactivate_cart, find_id, find_photo, cart_customer, find_user_is_registered
+from service.add_to_db import write_new_user, update_user_address
 import service.settings as settings
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
@@ -13,6 +14,8 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     filename='bot.log'
                     )
 
+NEW_USER = 0
+ADD_ADDRESS = 99
 
 def greet_user(bot, update, user_data):
     # print(user)
@@ -142,16 +145,39 @@ def bottles_section(bot, update, user_data):
 
 
 def registration(bot, update, user_data):
-    text = 'Обозначьте себя'
-    contact_button = KeyboardButton('Прислать контакты', request_contact=True)
-    address_button = KeyboardButton('Ввести адрес доставки')
-    menu_keyboard = ReplyKeyboardMarkup([[contact_button, address_button], ['В начало']], resize_keyboard=True, one_time_keyboard=True)
+    is_already_registered = find_user_is_registered(update.effective_user.id)
+    if not is_already_registered:
+        text = 'Обозначьте себя'
+        contact_button = KeyboardButton('Прислать контакты', request_contact=True, one_time_keyboard=True)
+        menu_keyboard = ReplyKeyboardMarkup([[contact_button], ['В начало']], resize_keyboard=True,
+                                            one_time_keyboard=True)
+        update.message.reply_text(text, reply_markup=menu_keyboard)
+        return NEW_USER
+    else:
+        address = is_already_registered.get('address')
+        if not address:
+            text = 'Вам нужно ввести адрес доставки:'
+            update.message.reply_text(text)
+            return ADD_ADDRESS
+        else:
+            text = 'Вы уже зарегистрированы'
+            menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
     update.message.reply_text(text, reply_markup=menu_keyboard)
 
 
+def proceed_registration(bot, update, user_data):
+    text = 'Записал, спасибо. Теперь напишите адрес доставки:'
+    write_new_user(update.message)
+    menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
+    update.message.reply_text(text, reply_markup=menu_keyboard)
+    return ADD_ADDRESS
+
+
 def start_address(bot, update, user_data):
-    update.message.reply_text("Введите адрес доставки", reply_markup=ReplyKeyboardRemove())
-    return "address"
+    update_user_address(update)
+    menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
+    update.message.reply_text('Готово!', reply_markup=menu_keyboard)
+    return ConversationHandler.END
 
 
 def cart(bot, update, user_data):
@@ -191,12 +217,19 @@ def checkout(bot, update, user_data):
 
 
 def main():
+    registration_handler = ConversationHandler(
+        entry_points=[RegexHandler('^(Регистрация)$', registration, pass_user_data=True)],
+        states={
+            NEW_USER: [MessageHandler(Filters.contact, proceed_registration, pass_user_data=True)],
+            ADD_ADDRESS: [MessageHandler(Filters.text, start_address, pass_user_data=True)]
+        },
+        fallbacks=[RegexHandler('^(В начало)$', greet_user, pass_user_data=True)],
+    )
     mybot = Updater(settings.API_KEY)
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Пиво)$', beer, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Корзина)$', cart, pass_user_data=True))
-    dp.add_handler(RegexHandler('^(Регистрация)$', registration, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Краны)$', taps, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Бутылки/Банки)$', bottles_root, pass_user_data=True))
     dp.add_handler(RegexHandler('^(В начало)$', greet_user, pass_user_data=True))
@@ -205,6 +238,7 @@ def main():
     dp.add_handler(RegexHandler('^(/)', bottles_section, pass_user_data=True))
     dp.add_handler(CallbackQueryHandler(add_button, pass_user_data=True))
     dp.add_handler(RegexHandler('^(К разделам бутылок)$', bottles_root, pass_user_data=True))
+    dp.add_handler(registration_handler)
     dp.add_handler(MessageHandler(Filters.text, talk_to_me, pass_user_data=True))
     mybot.start_polling()
     mybot.idle()

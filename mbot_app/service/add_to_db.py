@@ -28,6 +28,24 @@ def add_bottle(bottle):
     db.bottles.insert_one(bottle.__dict__)
 
 
+def write_new_user(user):
+    user_data = db_models.User(
+        user_id=user.effective_attachment.user_id,
+        username=user.chat.username,
+        chat_id=user.chat.id,
+        first_name=user.effective_attachment.first_name,
+        last_nameL=user.effective_attachment.last_name,
+        contacts=user.effective_attachment.phone_number
+    )
+    db.users.insert_one(user_data.__dict__)
+
+
+def update_user_address(message_data):
+    address = message_data.message.text
+    user_id = message_data.effective_user.id
+    db.users.update_one({'user_id': user_id}, {'$set': {'address': address}})
+
+
 if __name__ == '__main__':
     add_tap(tap_list())
     add_bottle(bottle_list())

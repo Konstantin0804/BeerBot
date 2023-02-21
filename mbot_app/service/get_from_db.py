@@ -97,6 +97,10 @@ def get_cart_by_user_id(user_id=None):
     return db.carts.find_one({'user_id': user_id, 'active_flag': 1})['cart']
 
 
+def find_user_is_registered(user_id):
+    return db.users.find_one({'user_id': user_id})
+
+
 def find_id(str_checkout, type_val):
     # print('find ',str_checkout)
     # print('find ',type_val)

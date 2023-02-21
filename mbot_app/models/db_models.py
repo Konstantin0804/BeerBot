@@ -128,3 +128,13 @@ class Tap:
         self._id = datetime.now().strftime("%Y-%m-%d %H:%M:%S") if not self._id else self._id
         self.act_flg = 1 if not self.act_flg else self.act_flg
 
+
+@dataclass
+class User:
+    user_id: int
+    chat_id: int
+    username: Optional[str] = None
+    first_name: Optional[str] = None
+    last_nameL: Optional[str] = None
+    contacts: Optional[str] = None
+    address: Optional[str] = None

@@ -903,3 +903,167 @@ Traceback (most recent call last):
     for j in current_cart['cart']:
 TypeError: 'NoneType' object is not subscriptable
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 158, in cart
+    cart = checkout_cart(update.effective_user, update.effective_user)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 158, in checkout_cart
+    for j in current_cart['cart']:
+TypeError: 'NoneType' object is not subscriptable
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 167, in registration
+    update.message.reply_text(reply_markup=menu_keyboard)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/message.py", line 478, in reply_text
+    return self.bot.send_message(self.chat_id, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+TypeError: send_message() missing 1 required positional argument: 'text'
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 167, in registration
+    update.message.reply_text(reply_markup=menu_keyboard)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/message.py", line 478, in reply_text
+    return self.bot.send_message(self.chat_id, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+TypeError: send_message() missing 1 required positional argument: 'text'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 135, in bottles_section
+    if k['bottle_name'] == sect[1:]:
+TypeError: 'NoneType' object is not subscriptable
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+TypeError: proceed_registration() got an unexpected keyword argument 'user_data'
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+TypeError: proceed_registration() got an unexpected keyword argument 'user_data'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 174, in proceed_registration
+    write_new_user(update.message)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 107, in write_new_user
+    username=user.effective_attachment.get('username'),
+AttributeError: 'Contact' object has no attribute 'get'
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 174, in proceed_registration
+    write_new_user(update.message)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 107, in write_new_user
+    username=user.effective_attachment.get('username'),
+AttributeError: 'Contact' object has no attribute 'get'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 174, in proceed_registration
+    write_new_user(update.message)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 107, in write_new_user
+    username=user.effective_attachment.get('username'),
+AttributeError: 'Contact' object has no attribute 'get'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 174, in proceed_registration
+    write_new_user(update.message)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 107, in write_new_user
+    username=user.effective_user.username,
+AttributeError: 'Message' object has no attribute 'effective_user'
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 174, in proceed_registration
+    write_new_user(update.message)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 107, in write_new_user
+    username=user.effective_user.username,
+AttributeError: 'Message' object has no attribute 'effective_user'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 174, in proceed_registration
+    write_new_user(update.message)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 113, in write_new_user
+    db.users.insert_one({user_data.__dict__})
+TypeError: unhashable type: 'dict'
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
