@@ -13,18 +13,18 @@ def get_tap():
 
 def get_bottle():
     sections_bottle = db.bottles.find_one({"act_flg": 1})["menu"]
-    sections_bottle = db_models.Menu(**sections_bottle)
+    sections_bottle = db_models.Menu.from_dict(sections_bottle)
     bottles = dict()
     bottles['id'] = sections_bottle.id
     bottles['name'] = sections_bottle.name
     for i in range(len(sections_bottle.sections)):
         bottles[f'bottle_info_{i}'] = dict()
-        i_item = db_models.Section(**sections_bottle.sections[i])
+        i_item = sections_bottle.sections[i]
         bottles[f'bottle_info_{i}']['bottle_name'] = i_item.name
         for j in range(len(i_item.items)):
             j_item = i_item.items[j]
-            if len(j_item['containers']) > 0:
-                bottles[f'bottle_info_{i}'][f'bottle_item_{j}'] = db_models.TapItem.from_dict(j_item).repr_necessary_data()
+            if len(j_item.containers) > 0:
+                bottles[f'bottle_info_{i}'][f'bottle_item_{j}'] = j_item.repr_necessary_data
     return bottles
 
 

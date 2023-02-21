@@ -1,18 +1,18 @@
 import requests
-from settings import HEADERS
+from mbot_app.service.settings import HEADERS, TAP_URL, BOTTLE_URL
 from mbot_app.datasource.db import db
 from mbot_app.models import db_models
 
 
 def tap_list():
-    pos_tap_url = "https://business.untappd.com/api/v1/menus/81847?full=true"
+    pos_tap_url = TAP_URL
     result_pos_tap = requests.get(pos_tap_url, headers=HEADERS)
     tap = result_pos_tap.json()
     return db_models.Tap(**tap)
 
 
 def bottle_list():
-    pos_bottle_url = "https://business.untappd.com/api/v1/menus/94668?full=true"
+    pos_bottle_url = BOTTLE_URL
     result_pos_bottle = requests.get(pos_bottle_url, headers=HEADERS)
     bottle = result_pos_bottle.json()
     return db_models.Tap(**bottle)

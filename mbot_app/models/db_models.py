@@ -46,6 +46,10 @@ class TapItem:
             self.price = '0.0'
         if not self.price:
             self.price = '--'
+        all_containers = []
+        for container in self.containers:
+            all_containers.append(Container.from_dict(container))
+        self.containers = all_containers
 
     def repr_necessary_data(self):
         repr_dict = self.__dict__
@@ -67,9 +71,22 @@ class Section:
     updated_at: datetime
     items: List[TapItem]
 
+    @classmethod
+    def from_dict(cls, env):
+        return cls(**{
+            k: v for k, v in env.items()
+            if k in inspect.signature(cls).parameters
+        })
+
+    def __post_init__(self):
+        all_items = []
+        for item in self.items:
+            all_items.append(TapItem.from_dict(item))
+        self.items = all_items
+
 
 @dataclass
-class Menu(List):
+class Menu:
     id: int
     location_id: int
     uuid: str
@@ -85,6 +102,20 @@ class Menu(List):
     on_deck_section: Section
     description: Optional[str] = None
     footer: Optional[str] = None
+
+    @classmethod
+    def from_dict(cls, env):
+        return cls(**{
+            k: v for k, v in env.items()
+            if k in inspect.signature(cls).parameters
+        })
+
+    def __post_init__(self):
+        self.on_deck_section = Section(**self.on_deck_section)
+        all_sections = []
+        for section in self.sections:
+            all_sections.append(Section(**section))
+        self.sections = all_sections
 
 
 @dataclass

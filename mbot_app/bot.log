@@ -843,3 +843,63 @@ telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
 telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 47, in taps
+    update.message.reply_text(reply_markup=menu_keyboard)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/message.py", line 478, in reply_text
+    return self.bot.send_message(self.chat_id, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/bot.py", line 66, in decorator
+    result = func(self, *args, **kwargs)
+TypeError: send_message() missing 1 required positional argument: 'text'
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 55, in add_button
+    c = add_to_cart(update.effective_user, t_id)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 76, in add_to_cart
+    if db.carts.find_one({'user_id': user_id, 'active_flag': 1}):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/collection.py", line 1459, in find_one
+    for result in cursor.limit(-1):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1248, in next
+    if len(self.__data) or self._refresh():
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1165, in _refresh
+    self.__send_message(q)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/cursor.py", line 1052, in __send_message
+    response = client._run_operation(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 105, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1330, in _run_operation
+    return self._retryable_read(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 105, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1448, in _retryable_read
+    return func(session, server, sock_info, read_pref)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1326, in _cmd
+    return server.run_operation(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/server.py", line 100, in run_operation
+    message = operation.get_message(read_preference, sock_info, use_cmd)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/message.py", line 388, in get_message
+    request_id, msg, size, _ = _op_msg(
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/pymongo/message.py", line 692, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: <telegram.user.User object at 0x102e62fa0>, of type: <class 'telegram.user.User'>
+telegram.ext.dispatcher - ERROR - No error handlers are registered, logging exception.
+Traceback (most recent call last):
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/dispatcher.py", line 372, in process_update
+    handler.handle_update(update, self, check, context)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/venv/lib/python3.9/site-packages/telegram/ext/handler.py", line 120, in handle_update
+    return self.callback(dispatcher.bot, update, **optional_args)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/miklyx_bot.py", line 158, in cart
+    cart = checkout_cart(update.effective_user, update.effective_user)
+  File "/Users/konstantin_slepchenko/PycharmProjects/mbot/mbot_app/service/get_from_db.py", line 158, in checkout_cart
+    for j in current_cart['cart']:
+TypeError: 'NoneType' object is not subscriptable
+telegram.ext.updater - INFO - Received signal 2 (SIGINT), stopping...

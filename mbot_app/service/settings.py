@@ -15,3 +15,7 @@ HEADERS = {'Content-Type': 'application/json', 'Authorization': 'Basic '
 
 DB_PASSWORD = os.getenv("DB_PASSWORD")
 DB_USER = os.getenv("DB_USER")
+DATABASE_URL = os.getenv("DB_SERVER")
+
+TAP_URL = "https://business.untappd.com/api/v1/menus/81847?full=true"
+BOTTLE_URL = "https://business.untappd.com/api/v1/menus/94668?full=true"
