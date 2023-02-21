@@ -169,29 +169,28 @@ def find_photo(str_checkout, type_val):
 
 
 def checkout_cart(user_data):
-    current_cart = list(db.carts.find({'user_id': user_data['id'], 'active_flag': 1}))
-    if not current_cart:
+    current_carts = list(db.carts.find({'user_id': user_data['id'], 'active_flag': 1}))
+    if not current_carts:
         return None
-    # print(customer_data)
+    selected_cart = sort_active_carts(current_carts).__dict__
     taps = get_tap()
     bottles = get_bottle()
-    # print(taps)
     checkout = dict()
-    for j in current_cart['cart']:
-        for i in taps.values():
+    for j in selected_cart['cart']:
+        for i in taps:
             if i['id'] == int(j):
                 checkout[i['id']] = i
-                checkout[i['id']]['c'] = current_cart['cart'][j]
+                checkout[i['id']]['c'] = selected_cart['cart'][j]
     bottles.pop('id')
     bottles.pop('name')
     for i in bottles.values():
         i.pop('bottle_name')
-    for j in current_cart['cart']:
+    for j in selected_cart['cart']:
         for i in bottles.values():
             for k in i.values():
                 if k['id'] == int(j):
                     checkout[k['id']] = k
-                    checkout[k['id']]['c'] = current_cart['cart'][j]
+                    checkout[k['id']]['c'] = selected_cart['cart'][j]
     return checkout
 
 

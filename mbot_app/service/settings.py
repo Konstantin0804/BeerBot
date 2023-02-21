@@ -19,3 +19,6 @@ DATABASE_URL = os.getenv("DB_SERVER")
 
 TAP_URL = "https://business.untappd.com/api/v1/menus/81847?full=true"
 BOTTLE_URL = "https://business.untappd.com/api/v1/menus/94668?full=true"
+
+NEW_USER = 0
+ADD_ADDRESS = 99

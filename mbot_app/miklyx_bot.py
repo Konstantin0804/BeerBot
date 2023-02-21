@@ -14,18 +14,11 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     filename='bot.log'
                     )
 
-NEW_USER = 0
-ADD_ADDRESS = 99
 
 def greet_user(bot, update, user_data):
-    # print(user)
     text = 'Здравствуйте, {}'.format(update.message.chat.first_name)
     menu_keyboard = ReplyKeyboardMarkup([['Пиво', 'Корзина'], ['Регистрация', 'Инструцкии']], resize_keyboard=True, one_time_keyboard=True)
     update.message.reply_text(text, reply_markup=menu_keyboard)
-    # TESTING ------------------------------------------------------
-    # test_text = {"id": 20241496, "name": "Breakfast Basics", "style": "Sour - Fruited", "brewery": "Outline", "abv": "4.2", "ibu": "0.0", 
-    # "label_image_hd": "https://beer.untappd.com/labels/3725269?size=hd", "position": 18, "price": "300.00", "c": 1}
-    # update.message.reply_photo('https://beer.untappd.com/labels/3725269?size=hd', 'text')
 
 
 def talk_to_me(bot, update, user_data):
@@ -52,59 +45,65 @@ def taps(bot, update, user_data):
 
 def add_button(bot, update, user_data):
     query = update.callback_query
-    if query.data == '1':
-        t_id = find_id(query.message.caption, 'tap')
-        c = add_to_cart(update.effective_user, t_id)
-
-        add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='1'),
-                                            InlineKeyboardButton(text="Убрать", callback_data='0')]])
-        bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-    elif query.data == '3':
-        t_id = find_id(query.message.caption, 'bottle')
-        c = add_to_cart(update.effective_user, t_id)
-        add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='3'),
-                                            InlineKeyboardButton(text="Убрать", callback_data='4')]])
-        bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-    elif query.data == '0':
-        t_id = find_id(query.message.caption, 'tap')
-        c = delete_from_cart(update.effective_user, t_id)
-        if c == 0:
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='1')]])
-            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-        else:
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='1'),
-                                            InlineKeyboardButton(text="Убрать", callback_data='0')]])
-            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-    elif query.data == '4':
-        t_id = find_id(query.message.caption, 'bottle')
-        c = delete_from_cart(update.effective_user,  t_id)
-        if c == 0:
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='3')]])
-            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-        else:
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='3'),
-                                            InlineKeyboardButton(text="Убрать", callback_data='4')]])
-            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-    elif query.data == '5' :
-        t_id = find_id(query.message.caption, 'tap')
-        if not t_id:
-            t_id = find_id(query.message.caption, 'bottle')
-        c = add_to_cart(update.effective_user, t_id)
-        add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='5'),
-                                            InlineKeyboardButton(text="Убрать", callback_data='6')]])
-        bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+    is_already_registered = find_user_is_registered(update.effective_user.id)
+    if not is_already_registered:
+        menu_keyboard = ReplyKeyboardMarkup([['В начало', 'Регистрация']], resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text('Кажется вы не зарегистрированы. Это займет всего 1 минуту, нажмите на Регистрация',
+                                  reply_markup=menu_keyboard)
     else:
-        t_id = find_id(query.message.caption, 'tap')
-        if not t_id:
+        if query.data == '1':
+            t_id = find_id(query.message.caption, 'tap')
+            c = add_to_cart(update.effective_user, t_id)
+
+            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='1'),
+                                                InlineKeyboardButton(text="Убрать", callback_data='0')]])
+            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+        elif query.data == '3':
             t_id = find_id(query.message.caption, 'bottle')
-        c = delete_from_cart(update.effective_user, t_id)
-        if c == 0:
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='5')]])
+            c = add_to_cart(update.effective_user, t_id)
+            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='3'),
+                                                InlineKeyboardButton(text="Убрать", callback_data='4')]])
+            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+        elif query.data == '0':
+            t_id = find_id(query.message.caption, 'tap')
+            c = delete_from_cart(update.effective_user, t_id)
+            if c == 0:
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='1')]])
+                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+            else:
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='1'),
+                                                InlineKeyboardButton(text="Убрать", callback_data='0')]])
+                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+        elif query.data == '4':
+            t_id = find_id(query.message.caption, 'bottle')
+            c = delete_from_cart(update.effective_user,  t_id)
+            if c == 0:
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='3')]])
+                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+            else:
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='3'),
+                                                InlineKeyboardButton(text="Убрать", callback_data='4')]])
+                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+        elif query.data == '5' :
+            t_id = find_id(query.message.caption, 'tap')
+            if not t_id:
+                t_id = find_id(query.message.caption, 'bottle')
+            c = add_to_cart(update.effective_user, t_id)
+            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='5'),
+                                                InlineKeyboardButton(text="Убрать", callback_data='6')]])
             bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
         else:
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='5'),
-                                            InlineKeyboardButton(text="Убрать", callback_data='6')]])
-            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+            t_id = find_id(query.message.caption, 'tap')
+            if not t_id:
+                t_id = find_id(query.message.caption, 'bottle')
+            c = delete_from_cart(update.effective_user, t_id)
+            if c == 0:
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='5')]])
+                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
+            else:
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='5'),
+                                                InlineKeyboardButton(text="Убрать", callback_data='6')]])
+                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
 
 
 def bottles_root(bot, update, user_data):
@@ -150,13 +149,13 @@ def registration(bot, update, user_data):
         menu_keyboard = ReplyKeyboardMarkup([[contact_button], ['В начало']], resize_keyboard=True,
                                             one_time_keyboard=True)
         update.message.reply_text(text, reply_markup=menu_keyboard)
-        return NEW_USER
+        return settings.NEW_USER
     else:
         address = is_already_registered.get('address')
         if not address:
             text = 'Вам нужно ввести адрес доставки:'
             update.message.reply_text(text)
-            return ADD_ADDRESS
+            return settings.ADD_ADDRESS
         else:
             text = 'Вы уже зарегистрированы'
             menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
@@ -168,7 +167,7 @@ def proceed_registration(bot, update, user_data):
     write_new_user(update.message)
     menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
     update.message.reply_text(text, reply_markup=menu_keyboard)
-    return ADD_ADDRESS
+    return settings.ADD_ADDRESS
 
 
 def start_address(bot, update, user_data):
@@ -185,15 +184,11 @@ def cart(bot, update, user_data):
         update.message.reply_text('У вас нет активных заказов.', reply_markup=menu_keyboard)
     else:
         menu_keyboard = ReplyKeyboardMarkup([['В начало', ' Заказать']], resize_keyboard=True, one_time_keyboard=True)
-        #  print(cart)
         for i in current_cart.values():
-            # print(i)
             cart_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(i['c'])+')', callback_data='5'),
                                                 InlineKeyboardButton(text="Убрать", callback_data='6')]])
-            # update.message.reply_text(i, reply_markup=cart_keyboard)
             about = i['name']+', Стиль: '+i['style']+', Пивоварня: '+i['brewery']+', ABV: '+i['abv']+', IBU: '+i['ibu']+'\n'+'Цена: '+i['price']
             update.message.reply_photo(i['label_image_hd'], about, reply_markup= cart_keyboard)
-        # update.message.reply_text('Chooooose', reply_markup=add_keyboard)
         update.message.reply_text('Ваш заказ', reply_markup=menu_keyboard)
 
 
@@ -222,8 +217,8 @@ def main():
     registration_handler = ConversationHandler(
         entry_points=[RegexHandler('^(Регистрация)$', registration, pass_user_data=True)],
         states={
-            NEW_USER: [MessageHandler(Filters.contact, proceed_registration, pass_user_data=True)],
-            ADD_ADDRESS: [MessageHandler(Filters.text, start_address, pass_user_data=True)]
+            settings.NEW_USER: [MessageHandler(Filters.contact, proceed_registration, pass_user_data=True)],
+            settings.ADD_ADDRESS: [MessageHandler(Filters.text, start_address, pass_user_data=True)]
         },
         fallbacks=[RegexHandler('^(В начало)$', greet_user, pass_user_data=True)],
     )
