@@ -31,7 +31,7 @@ def get_bottle():
 def get_bottle_names_dict(all_bottles):
     bottles_name_dict = {}
     for bottle, value in all_bottles.items():
-        if bottle.startswith('bottle_info_'):
+        if bottle.startswith('bottle_info_') and len(value) > 1:
             bottles_name_dict[value.get('bottle_name')] = f"/{value.get('bottle_name')}"
     return bottles_name_dict
 
