@@ -30,6 +30,14 @@ def get_bottle():
     return bottles
 
 
+def get_bottle_names_dict(all_bottles):
+    bottles_name_dict = {}
+    for bottle, value in all_bottles.items():
+        if bottle.startswith('bottle_info_'):
+            bottles_name_dict[value.get('bottle_name')] = f"/{value.get('bottle_name')}"
+    return bottles_name_dict
+
+
 def user_put_if_absent(user_candidate, chat_id):
     user = db.users.find_one({"user_id": user_candidate['id']})
     if not user:
@@ -163,6 +171,8 @@ def find_photo(str_checkout, type_val):
 
 def checkout_cart(user_data):
     selected_cart = get_cart_by_user_id(user_data)
+    if not selected_cart:
+        return None
     taps = get_tap()
     bottles = get_bottle()
     checkout = dict()
@@ -194,4 +204,6 @@ def deactivate_cart(user_data):
 
 
 if __name__ == '__main__':
-    get_bottle()
+    bottles = get_bottle()
+    bottles_dict = get_bottle_names_dict(bottles)
+

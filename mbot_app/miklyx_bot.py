@@ -1,11 +1,31 @@
 import logging
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, \
-    RegexHandler, ConversationHandler, CallbackQueryHandler
-from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, \
-    InlineKeyboardButton, KeyboardButton, ReplyKeyboardRemove
-from service.get_from_db import get_tap, get_bottle, \
-    toggle_subscription, add_contact, add_address, add_to_cart, \
-    delete_from_cart, checkout_cart, deactivate_cart, find_id, find_photo, cart_customer, find_user_is_registered
+from itertools import islice
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    MessageHandler,
+    Filters,
+    RegexHandler,
+    ConversationHandler,
+    CallbackQueryHandler
+)
+from telegram import (
+    ReplyKeyboardMarkup,
+    InlineKeyboardMarkup,
+    InlineKeyboardButton,
+    KeyboardButton
+)
+from service.get_from_db import (
+    get_tap,
+    get_bottle,
+    add_to_cart,
+    delete_from_cart,
+    checkout_cart,
+    deactivate_cart,
+    find_id,
+    find_user_is_registered,
+    get_bottle_names_dict
+)
 from service.add_to_db import write_new_user, update_user_address
 import service.settings as settings
 
@@ -17,7 +37,8 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
 
 def greet_user(bot, update, user_data):
     text = 'Здравствуйте, {}'.format(update.message.chat.first_name)
-    menu_keyboard = ReplyKeyboardMarkup([['Пиво', 'Корзина'], ['Регистрация', 'Инструцкии']], resize_keyboard=True, one_time_keyboard=True)
+    menu_keyboard = ReplyKeyboardMarkup([['Пиво', 'Корзина'], ['Регистрация', 'Инструцкии']],
+                                        resize_keyboard=True, one_time_keyboard=True)
     update.message.reply_text(text, reply_markup=menu_keyboard)
 
 
@@ -29,13 +50,15 @@ def talk_to_me(bot, update, user_data):
 
 def beer(bot, update, user_data):
     text = 'Пиво'
-    menu_keyboard = ReplyKeyboardMarkup([['Краны', 'Бутылки/Банки'], ['В начало']], resize_keyboard=True, one_time_keyboard=True)
+    menu_keyboard = ReplyKeyboardMarkup([['Краны', 'Бутылки/Банки'], ['В начало']],
+                                        resize_keyboard=True, one_time_keyboard=True)
     update.message.reply_text(text, reply_markup=menu_keyboard)
 
 
 def taps(bot, update, user_data):
     text = get_tap()
-    menu_keyboard = ReplyKeyboardMarkup([['К корню пива','Корзина'],['В начало']], resize_keyboard=True, one_time_keyboard=True)
+    menu_keyboard = ReplyKeyboardMarkup([['К корню пива', 'Корзина'], ['В начало']],
+                                        resize_keyboard=True, one_time_keyboard=True)
     add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='1')]])
     for i in range(len(text)):
         about = text[i]['name']+', Стиль: '+text[i]['style']+', Пивоварня: '+text[i]['brewery']+', ABV: '+text[i]['abv']+', IBU: '+text[i]['ibu']+'\n'+'Цена: '+text[i]['price']
@@ -108,17 +131,18 @@ def add_button(bot, update, user_data):
 
 def bottles_root(bot, update, user_data):
     text = get_bottle()
-    sect = list(text.values())[2:]
-    styles = list()
-    for i in sect:
-        styles.append(i['bottle_name'])
-        menu_keyboard = ReplyKeyboardMarkup([['/SALE', '/APA / IPA/ DIPA / PALE', '/STOUT / PORTER'],
-                                        ['/SOUR / LAMBIC / SAISON / WILD / BRETT '],
-                                        ['/FRUIT /BERRY / VEG', '/GERMAN WING', '/BELGIAN STYLE'],
-                                        ['/BARLEYWINE / OLD / STRONG / WEE HEAVY', '/LAGER / KÖLSCH / HELLES / PILSNER'],
-                                        ['/CIDER / MEAD', '/SOFT DRINKS / ALKO FREE'],
-                                        ['К корню пива', 'Корзина', 'В начало']], resize_keyboard=True, one_time_keyboard=True)
-    update.message.reply_text('Сорта пива в бутылках', reply_markup=menu_keyboard)
+    all_bottles_types = get_bottle_names_dict(text)
+    if len(all_bottles_types) == 0:
+        menu_keyboard = ReplyKeyboardMarkup([['К корню пива', 'Корзина'], ['В начало']],
+                                            resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text('Кажется, на данный момент пива в бутылках не осталось', reply_markup=menu_keyboard)
+    else:
+        keyboard_list = iter(all_bottles_types.values())
+        keyboard_list_splitted = [list(islice(keyboard_list, elem)) for elem in
+                                  settings.LENGTH_TO_SPLIT_BUTTONS_FOR_BOTTLE]
+        menu_keyboard = ReplyKeyboardMarkup(keyboard_list_splitted + [['К корню пива', 'Корзина', 'В начало']],
+                                            resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text('Сорта пива в бутылках', reply_markup=menu_keyboard)
 
 
 def bottles_section(bot, update, user_data):
@@ -126,7 +150,8 @@ def bottles_section(bot, update, user_data):
     text = get_bottle()
     text.pop('id')
     text.pop('name')
-    menu_keyboard = ReplyKeyboardMarkup([['К разделам бутылок', 'Корзина'],['К корню пива', 'В начало']], resize_keyboard=True, one_time_keyboard=True)
+    menu_keyboard = ReplyKeyboardMarkup([['К разделам бутылок', 'Корзина'], ['К корню пива', 'В начало']],
+                                        resize_keyboard=True, one_time_keyboard=True)
     add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='3')]])
     for i in text.values():
         k = i
@@ -199,7 +224,7 @@ def checkout(bot, update, user_data):
         update.message.reply_text('У вас нет активных заказов.', reply_markup=menu_keyboard)
     else:
         customer = find_user_is_registered(update.effective_user.id)
-        out = ''
+        out = 'Новый заказ:\n'
         k = 0
         for i in cart_for_checkout.values():
             if not i['price']:
@@ -208,11 +233,13 @@ def checkout(bot, update, user_data):
             k = k + int(i['c'])*float(i['price'])
         out = out + '\n' + 'Итого: ' + str(k) + '\n Заказчик: ' + str(customer['first_name'])+ ' '+ str(customer['last_name']) + '\n ник: '+ str(customer['username']) + '\n телефон: ' + str(customer['contacts']) + '\n адрес: ' + str(customer['address'])
         if customer['contacts'] and customer['address']:
-            #bot.send_message(chat_id=129058202, text=out)
-            bot.send_message(chat_id=customer['chat_id'], text=out)
+            menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
+            update.message.reply_text('Ваш заказ отправлен, скоро с вами свяжутся', reply_markup=menu_keyboard)
+            bot.send_message(chat_id=int(settings.CHAT_FOR_CHECKOUT), text=out)
             deactivate_cart(update.effective_user)
         else:
-            menu_keyboard = ReplyKeyboardMarkup([['В начало', 'Регистрация']], resize_keyboard=True, one_time_keyboard=True)
+            menu_keyboard = ReplyKeyboardMarkup([['В начало', 'Регистрация']], resize_keyboard=True,
+                                                one_time_keyboard=True)
             update.message.reply_text('Введите контактные данные по кнопке "Регистрация"', reply_markup=menu_keyboard)
 
 

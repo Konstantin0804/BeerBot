@@ -22,3 +22,6 @@ BOTTLE_URL = "https://business.untappd.com/api/v1/menus/94668?full=true"
 
 NEW_USER = 0
 ADD_ADDRESS = 99
+ADD_PHONE = 88
+LENGTH_TO_SPLIT_BUTTONS_FOR_BOTTLE = [3, 2, 3, 3, 3]
+CHAT_FOR_CHECKOUT = os.getenv("DEVELOPER_CHAT") if os.getenv("ENVIRONMENT") == "LOCAL_DEV" else os.getenv("PROD_CHAT")

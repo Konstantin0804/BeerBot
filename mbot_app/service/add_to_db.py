@@ -34,7 +34,7 @@ def write_new_user(user):
         username=user.chat.username,
         chat_id=user.chat.id,
         first_name=user.effective_attachment.first_name,
-        last_nameL=user.effective_attachment.last_name,
+        last_name=user.effective_attachment.last_name,
         contacts=user.effective_attachment.phone_number
     )
     db.users.insert_one(user_data.__dict__)
