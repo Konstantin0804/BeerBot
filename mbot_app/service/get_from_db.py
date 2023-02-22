@@ -1,5 +1,3 @@
-import datetime
-
 from datasource.db import db
 from models import db_models
 

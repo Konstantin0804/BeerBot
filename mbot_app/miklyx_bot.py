@@ -37,7 +37,15 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
 
 def greet_user(bot, update, user_data):
     text = 'Здравствуйте, {}'.format(update.message.chat.first_name)
-    menu_keyboard = ReplyKeyboardMarkup([['Пиво', 'Корзина'], ['Регистрация', 'Инструцкии']],
+    menu_keyboard = ReplyKeyboardMarkup([['Пиво', 'Корзина'], ['Регистрация', 'Инструкции']],
+                                        resize_keyboard=True, one_time_keyboard=True)
+    update.message.reply_text(text, reply_markup=menu_keyboard)
+
+
+def instructions(bot, update, user_data):
+    text = 'Через меня можно заказать любимое пивко. \nСначала тебе нужно будет зарегистрироваться ' \
+           '(это займет всего минуту), затем выбрать любимое пиво и оформить заказ. Такие дела.'
+    menu_keyboard = ReplyKeyboardMarkup([['Регистрация'], ['Пиво', 'В начало']],
                                         resize_keyboard=True, one_time_keyboard=True)
     update.message.reply_text(text, reply_markup=menu_keyboard)
 
@@ -256,6 +264,7 @@ def main():
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Пиво)$', beer, pass_user_data=True))
+    dp.add_handler(RegexHandler('^(Инструкции)$', instructions, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Корзина)$', cart, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Краны)$', taps, pass_user_data=True))
     dp.add_handler(RegexHandler('^(Бутылки/Банки)$', bottles_root, pass_user_data=True))
