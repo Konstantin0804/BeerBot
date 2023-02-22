@@ -1,7 +1,7 @@
 import datetime
 
-from mbot_app.datasource.db import db
-from mbot_app.models import db_models
+from datasource.db import db
+from models import db_models
 
 
 def get_tap():

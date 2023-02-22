@@ -1,7 +1,7 @@
 import requests
-from mbot_app.service.settings import HEADERS, TAP_URL, BOTTLE_URL
-from mbot_app.datasource.db import db
-from mbot_app.models import db_models
+from service.settings import HEADERS, TAP_URL, BOTTLE_URL
+from datasource.db import db
+from models import db_models
 
 
 def tap_list():
