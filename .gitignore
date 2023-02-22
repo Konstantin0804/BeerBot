@@ -1,5 +1,6 @@
-
 .idea
 venv
-*.env
+.env
 mbot_app/bot.log
+*.log
+*.pkg
