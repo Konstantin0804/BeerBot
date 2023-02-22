@@ -1,7 +1,6 @@
 from datetime import datetime
 from dataclasses import dataclass, field
-from typing import List, Dict, Optional
-from bson import ObjectId
+from typing import List, Optional
 import inspect
 
 

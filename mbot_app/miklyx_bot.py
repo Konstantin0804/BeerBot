@@ -28,6 +28,8 @@ from service.get_from_db import (
 )
 from service.add_to_db import write_new_user, update_user_address
 import service.settings as settings
+import service.static_data as static_data
+import service.message_constructors as message_constructors
 
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
@@ -36,24 +38,19 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
 
 
 def greet_user(bot, update, user_data):
-    text = 'Здравствуйте, {}'.format(update.message.chat.first_name)
     menu_keyboard = ReplyKeyboardMarkup([['Пиво', 'Корзина'], ['Регистрация', 'Инструкции']],
                                         resize_keyboard=True, one_time_keyboard=True)
-    update.message.reply_text(text, reply_markup=menu_keyboard)
+    update.message.reply_text(static_data.TALK_TO_ME.format(update.message.chat.first_name), reply_markup=menu_keyboard)
 
 
 def instructions(bot, update, user_data):
-    text = 'Через меня можно заказать любимое пивко. \nСначала тебе нужно будет зарегистрироваться ' \
-           '(это займет всего минуту), затем выбрать любимое пиво и оформить заказ. Такие дела.'
     menu_keyboard = ReplyKeyboardMarkup([['Регистрация'], ['Пиво', 'В начало']],
                                         resize_keyboard=True, one_time_keyboard=True)
-    update.message.reply_text(text, reply_markup=menu_keyboard)
+    update.message.reply_text(static_data.INSTRUCTIONS_TEXT, reply_markup=menu_keyboard)
 
 
 def talk_to_me(bot, update, user_data):
-    user_text = update.message.text
-    print("А может ты "+user_text)
-    update.message.reply_text("А может ты "+user_text+"?")
+    update.message.reply_text(static_data.MAYBE_YOU.format(update.message.text))
 
 
 def beer(bot, update, user_data):
@@ -65,11 +62,11 @@ def beer(bot, update, user_data):
 
 def taps(bot, update, user_data):
     text = get_tap()
-    menu_keyboard = ReplyKeyboardMarkup([['К корню пива', 'Корзина'], ['В начало']],
+    menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTONS_ROOT_BUCKET_BEGIN,
                                         resize_keyboard=True, one_time_keyboard=True)
     add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='1')]])
     for i in range(len(text)):
-        about = text[i]['name']+', Стиль: '+text[i]['style']+', Пивоварня: '+text[i]['brewery']+', ABV: '+text[i]['abv']+', IBU: '+text[i]['ibu']+'\n'+'Цена: '+text[i]['price']
+        about = message_constructors.construct_tap_message(i, text)
         update.message.reply_photo(text[i]['label_image_hd'], about, reply_markup=add_keyboard)
     update.message.reply_text(reply_markup=menu_keyboard)
 
@@ -78,9 +75,8 @@ def add_button(bot, update, user_data):
     query = update.callback_query
     is_already_registered = find_user_is_registered(update.effective_user.id)
     if not is_already_registered:
-        menu_keyboard = ReplyKeyboardMarkup([['В начало', 'Регистрация']], resize_keyboard=True, one_time_keyboard=True)
-        update.message.reply_text('Кажется вы не зарегистрированы. Это займет всего 1 минуту, нажмите на Регистрация',
-                                  reply_markup=menu_keyboard)
+        menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTONS_REG_BEGIN, resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text(static_data.NOT_REGISTERED, reply_markup=menu_keyboard)
     else:
         if query.data == '1':
             t_id = find_id(query.message.caption, 'tap')
@@ -141,16 +137,16 @@ def bottles_root(bot, update, user_data):
     text = get_bottle()
     all_bottles_types = get_bottle_names_dict(text)
     if len(all_bottles_types) == 0:
-        menu_keyboard = ReplyKeyboardMarkup([['К корню пива', 'Корзина'], ['В начало']],
-                                            resize_keyboard=True, one_time_keyboard=True)
-        update.message.reply_text('Кажется, на данный момент пива в бутылках не осталось', reply_markup=menu_keyboard)
+        menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTONS_ROOT_BUCKET_BEGIN, resize_keyboard=True,
+                                            one_time_keyboard=True)
+        update.message.reply_text(static_data.NO_BOTTLES_LEFT, reply_markup=menu_keyboard)
     else:
         keyboard_list = iter(all_bottles_types.values())
         keyboard_list_splitted = [list(islice(keyboard_list, elem)) for elem in
                                   settings.LENGTH_TO_SPLIT_BUTTONS_FOR_BOTTLE]
-        menu_keyboard = ReplyKeyboardMarkup(keyboard_list_splitted + [['К корню пива', 'Корзина', 'В начало']],
+        menu_keyboard = ReplyKeyboardMarkup(keyboard_list_splitted + static_data.BUTTONS_ROOT_BUCKET_BEGIN,
                                             resize_keyboard=True, one_time_keyboard=True)
-        update.message.reply_text('Сорта пива в бутылках', reply_markup=menu_keyboard)
+        update.message.reply_text(static_data.BEER_IN_BOTTLES, reply_markup=menu_keyboard)
 
 
 def bottles_section(bot, update, user_data):
@@ -168,8 +164,8 @@ def bottles_section(bot, update, user_data):
         if k['bottle_name'] == sect[1:]:
             k.pop("bottle_name")
             for j in k.values():
-                about = j['name']+', Стиль: '+j['style']+', Пивоварня: '+j['brewery']+', ABV: '+j['abv']+', IBU: '+j['ibu']+'\n'+'Цена: '+j['price']
-                update.message.reply_photo(j['label_image_hd'],about, reply_markup=add_keyboard)
+                about = message_constructors.construct_cart_message(j)
+                update.message.reply_photo(j['label_image_hd'], about, reply_markup=add_keyboard)
             break
     update.message.reply_text(reply_markup=menu_keyboard)
 
@@ -177,78 +173,68 @@ def bottles_section(bot, update, user_data):
 def registration(bot, update, user_data):
     is_already_registered = find_user_is_registered(update.effective_user.id)
     if not is_already_registered:
-        text = 'Обозначьте себя'
-        contact_button = KeyboardButton('Прислать контакты', request_contact=True, one_time_keyboard=True)
-        menu_keyboard = ReplyKeyboardMarkup([[contact_button], ['В начало']], resize_keyboard=True,
+        contact_button = KeyboardButton(static_data.BUTTON_CONTACT, request_contact=True, one_time_keyboard=True)
+        menu_keyboard = ReplyKeyboardMarkup([[contact_button], static_data.BUTTON_BEGIN[0]], resize_keyboard=True,
                                             one_time_keyboard=True)
-        update.message.reply_text(text, reply_markup=menu_keyboard)
+        update.message.reply_text(static_data.TELL_ABOUT_YOU, reply_markup=menu_keyboard)
         return settings.NEW_USER
     else:
         address = is_already_registered.get('address')
         if not address:
-            text = 'Вам нужно ввести адрес доставки:'
-            update.message.reply_text(text)
+            update.message.reply_text(static_data.ENTER_ADDRESS)
             return settings.ADD_ADDRESS
         else:
-            text = 'Вы уже зарегистрированы'
-            menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
-    update.message.reply_text(text, reply_markup=menu_keyboard)
+            menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTON_BEGIN, resize_keyboard=True, one_time_keyboard=True)
+    update.message.reply_text(static_data.ALREADY_REGISTERED, reply_markup=menu_keyboard)
 
 
 def proceed_registration(bot, update, user_data):
-    text = 'Записал, спасибо. Теперь напишите адрес доставки:'
     write_new_user(update.message)
-    menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
-    update.message.reply_text(text, reply_markup=menu_keyboard)
+    menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTON_BEGIN, resize_keyboard=True, one_time_keyboard=True)
+    update.message.reply_text(static_data.NEXT_ENTER_ADDRESS, reply_markup=menu_keyboard)
     return settings.ADD_ADDRESS
 
 
 def start_address(bot, update, user_data):
     update_user_address(update)
-    menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
-    update.message.reply_text('Готово!', reply_markup=menu_keyboard)
+    menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTON_BEGIN, resize_keyboard=True, one_time_keyboard=True)
+    update.message.reply_text(static_data.DONE, reply_markup=menu_keyboard)
     return ConversationHandler.END
 
 
 def cart(bot, update, user_data):
     current_cart = checkout_cart(update.effective_user)
     if not current_cart:
-        menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
-        update.message.reply_text('У вас нет активных заказов.', reply_markup=menu_keyboard)
+        menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTON_BEGIN, resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text(static_data.NO_ACTIVE_ORDERS, reply_markup=menu_keyboard)
     else:
         menu_keyboard = ReplyKeyboardMarkup([['В начало', ' Заказать']], resize_keyboard=True, one_time_keyboard=True)
         for i in current_cart.values():
-            cart_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(i['c'])+')', callback_data='5'),
-                                                InlineKeyboardButton(text="Убрать", callback_data='6')]])
-            about = i['name']+', Стиль: '+i['style']+', Пивоварня: '+i['brewery']+', ABV: '+i['abv']+', IBU: '+i['ibu']+'\n'+'Цена: '+i['price']
-            update.message.reply_photo(i['label_image_hd'], about, reply_markup= cart_keyboard)
+            cart_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(
+                text="Добавить ("+str(i['c'])+')', callback_data='5'),
+                InlineKeyboardButton(text="Убрать", callback_data='6')]])
+            about = message_constructors.construct_cart_message(i)
+            update.message.reply_photo(i['label_image_hd'], about, reply_markup=cart_keyboard)
         update.message.reply_text('Ваш заказ', reply_markup=menu_keyboard)
 
 
 def checkout(bot, update, user_data):
     cart_for_checkout = checkout_cart(update.effective_user)
     if not cart_for_checkout:
-        menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
-        update.message.reply_text('У вас нет активных заказов.', reply_markup=menu_keyboard)
+        menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTON_BEGIN, resize_keyboard=True, one_time_keyboard=True)
+        update.message.reply_text(static_data.NO_ACTIVE_ORDERS, reply_markup=menu_keyboard)
     else:
         customer = find_user_is_registered(update.effective_user.id)
-        out = 'Новый заказ:\n'
-        k = 0
-        for i in cart_for_checkout.values():
-            if not i['price']:
-                i['price'] = 0
-            out = out + 'Наименование: '+str(i['name'])+', '+'количество: '+str(i['c'])+', '+'цена: '+str(i['price'])+', итого = '+str(int(i['c'])*float(i['price'])) + '\n'
-            k = k + int(i['c'])*float(i['price'])
-        out = out + '\n' + 'Итого: ' + str(k) + '\n Заказчик: ' + str(customer['first_name'])+ ' '+ str(customer['last_name']) + '\n ник: '+ str(customer['username']) + '\n телефон: ' + str(customer['contacts']) + '\n адрес: ' + str(customer['address'])
+        checkout_message = message_constructors.get_checkout_message(cart_for_checkout, customer)
         if customer['contacts'] and customer['address']:
-            menu_keyboard = ReplyKeyboardMarkup([['В начало']], resize_keyboard=True, one_time_keyboard=True)
-            update.message.reply_text('Ваш заказ отправлен, скоро с вами свяжутся', reply_markup=menu_keyboard)
-            bot.send_message(chat_id=int(settings.CHAT_FOR_CHECKOUT), text=out)
+            menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTON_BEGIN, resize_keyboard=True, one_time_keyboard=True)
+            update.message.reply_text(static_data.ORDER_PROCEEDED, reply_markup=menu_keyboard)
+            bot.send_message(chat_id=int(settings.CHAT_FOR_CHECKOUT), text=checkout_message)
             deactivate_cart(update.effective_user)
         else:
-            menu_keyboard = ReplyKeyboardMarkup([['В начало', 'Регистрация']], resize_keyboard=True,
+            menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTONS_REG_BEGIN, resize_keyboard=True,
                                                 one_time_keyboard=True)
-            update.message.reply_text('Введите контактные данные по кнопке "Регистрация"', reply_markup=menu_keyboard)
+            update.message.reply_text(static_data.FINALY_ENTER_CONTACTS, reply_markup=menu_keyboard)
 
 
 def main():
