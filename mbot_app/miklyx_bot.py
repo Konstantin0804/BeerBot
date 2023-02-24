@@ -22,7 +22,6 @@ from service.get_from_db import (
     delete_from_cart,
     checkout_cart,
     deactivate_cart,
-    find_id,
     find_user_is_registered,
     get_bottle_names_dict
 )
@@ -64,8 +63,10 @@ def taps(bot, update, user_data):
     text = get_tap()
     menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTONS_ROOT_BUCKET_BEGIN,
                                         resize_keyboard=True, one_time_keyboard=True)
-    add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='1')]])
     for i in range(len(text)):
+        callback_tap_data = f'add-{text[i]["id"]}'
+        add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(
+            text="Добавить", callback_data=callback_tap_data)]])
         about = message_constructors.construct_tap_message(i, text)
         update.message.reply_photo(text[i]['label_image_hd'], about, reply_markup=add_keyboard)
     update.message.reply_text(reply_markup=menu_keyboard)
@@ -78,58 +79,21 @@ def add_button(bot, update, user_data):
         menu_keyboard = ReplyKeyboardMarkup(static_data.BUTTONS_REG_BEGIN, resize_keyboard=True, one_time_keyboard=True)
         update.message.reply_text(static_data.NOT_REGISTERED, reply_markup=menu_keyboard)
     else:
-        if query.data == '1':
-            t_id = find_id(query.message.caption, 'tap')
-            c = add_to_cart(update.effective_user, t_id)
+        callback_data = query.data.split('-')
+        if callback_data[0] == 'add':
+            c = add_to_cart(update.effective_user, callback_data[1])
 
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='1'),
-                                                InlineKeyboardButton(text="Убрать", callback_data='0')]])
+            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data=f'add-{callback_data[1]}'),
+                                                InlineKeyboardButton(text="Убрать", callback_data=f'del-{callback_data[1]}')]])
             bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-        elif query.data == '3':
-            t_id = find_id(query.message.caption, 'bottle')
-            c = add_to_cart(update.effective_user, t_id)
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='3'),
-                                                InlineKeyboardButton(text="Убрать", callback_data='4')]])
-            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-        elif query.data == '0':
-            t_id = find_id(query.message.caption, 'tap')
-            c = delete_from_cart(update.effective_user, t_id)
+        elif callback_data[0] == 'del':
+            c = delete_from_cart(update.effective_user, callback_data[1])
             if c == 0:
-                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='1')]])
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data=f'add-{callback_data[1]}')]])
                 bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
             else:
-                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='1'),
-                                                InlineKeyboardButton(text="Убрать", callback_data='0')]])
-                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-        elif query.data == '4':
-            t_id = find_id(query.message.caption, 'bottle')
-            c = delete_from_cart(update.effective_user,  t_id)
-            if c == 0:
-                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='3')]])
-                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-            else:
-                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='3'),
-                                                InlineKeyboardButton(text="Убрать", callback_data='4')]])
-                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-        elif query.data == '5' :
-            t_id = find_id(query.message.caption, 'tap')
-            if not t_id:
-                t_id = find_id(query.message.caption, 'bottle')
-            c = add_to_cart(update.effective_user, t_id)
-            add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='5'),
-                                                InlineKeyboardButton(text="Убрать", callback_data='6')]])
-            bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-        else:
-            t_id = find_id(query.message.caption, 'tap')
-            if not t_id:
-                t_id = find_id(query.message.caption, 'bottle')
-            c = delete_from_cart(update.effective_user, t_id)
-            if c == 0:
-                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='5')]])
-                bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
-            else:
-                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data='5'),
-                                                InlineKeyboardButton(text="Убрать", callback_data='6')]])
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить ("+str(c)+')', callback_data=f'add-{callback_data[1]}'),
+                                                InlineKeyboardButton(text="Убрать", callback_data=f'del-{callback_data[1]}')]])
                 bot.edit_message_reply_markup(chat_id=query.message.chat.id, message_id=query.message.message_id, reply_markup=add_keyboard)
 
 
@@ -156,7 +120,6 @@ def bottles_section(bot, update, user_data):
     text.pop('name')
     menu_keyboard = ReplyKeyboardMarkup([['К разделам бутылок', 'Корзина'], ['К корню пива', 'В начало']],
                                         resize_keyboard=True, one_time_keyboard=True)
-    add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data='3')]])
     for i in text.values():
         k = i
         if i['bottle_name'][-1] == ' ':
@@ -164,6 +127,8 @@ def bottles_section(bot, update, user_data):
         if k['bottle_name'] == sect[1:]:
             k.pop("bottle_name")
             for j in k.values():
+                bottle_id = j['id']
+                add_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(text="Добавить", callback_data=f'add-{bottle_id}')]])
                 about = message_constructors.construct_cart_message(j)
                 update.message.reply_photo(j['label_image_hd'], about, reply_markup=add_keyboard)
             break
@@ -211,8 +176,8 @@ def cart(bot, update, user_data):
         menu_keyboard = ReplyKeyboardMarkup([['В начало', ' Заказать']], resize_keyboard=True, one_time_keyboard=True)
         for i in current_cart.values():
             cart_keyboard = InlineKeyboardMarkup([[InlineKeyboardButton(
-                text="Добавить ("+str(i['c'])+')', callback_data='5'),
-                InlineKeyboardButton(text="Убрать", callback_data='6')]])
+                text="Добавить ("+str(i['c'])+')', callback_data=f'add-{i["id"]}'),
+                InlineKeyboardButton(text="Убрать", callback_data=f'del-{i["id"]}')]])
             about = message_constructors.construct_cart_message(i)
             update.message.reply_photo(i['label_image_hd'], about, reply_markup=cart_keyboard)
         update.message.reply_text('Ваш заказ', reply_markup=menu_keyboard)

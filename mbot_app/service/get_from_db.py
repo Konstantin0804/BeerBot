@@ -36,41 +36,6 @@ def get_bottle_names_dict(all_bottles):
     return bottles_name_dict
 
 
-def user_put_if_absent(user_candidate, chat_id):
-    user = db.users.find_one({"user_id": user_candidate['id']})
-    if not user:
-        user = {
-            "user_id": user.id,
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "username": user.username,
-            "chat_id": user.chat_id
-        }
-        db.users.insert_one(user)
-    return user
-
-
-def toggle_subscription(user_data):
-    if not user_data.get("subscribed"):
-        user_data['subscribed'] = True
-    else:
-        user_data['subscribed'] = False
-    db.users.update_one(
-        {"_id": user_data["_id"]},
-        {'$set': {'subscribed': user_data['subscribed']}}
-    )
-
-
-def add_contact(user_data, message):
-    # print(user_data)
-    # print(message.contact.phone_number)
-    # print(db.users.find_one({"_id": user_data["_id"]}))
-    db.users.update_one(
-        {"_id": user_data["_id"]},
-        {'$set': {'contacts': message.contact.phone_number}}
-    )
-
-
 def add_address(user_data, address):
     print(address)
     db.users.update_one(
@@ -107,11 +72,14 @@ def delete_from_cart(user_id, beer_id):
     if user_cart:
         if not user_cart.cart.get(beer_id):
             return 0
-        else:
+        elif user_cart.cart.get(beer_id) > 1:
             user_cart.cart[beer_id] -= 1
+            count = user_cart.cart[beer_id]
+        else:
+            user_cart.cart.pop(beer_id)
+            count = 0
         db.carts.update_one({'user_id': user_id.id, 'active_flag': 1},
                             {'$set': {'cart': user_cart.cart}})
-        count = user_cart.cart[beer_id]
         return count
 
 
@@ -128,6 +96,11 @@ def find_user_is_registered(user_id):
 
 
 def find_id(str_checkout, type_val):
+    """
+        Function for getting a beer ID from DB passing style and brewery.
+        Not using now, artefact from previous versions, but may be useful in future
+    """
+
     name = str_checkout.split(', Стиль: ')[0]
     brewery = str_checkout.split(', Стиль: ')[1].split(', Пивоварня: ')[1].split(', ABV')[0]
     # style = str_checkout.split('Стиль: ')[1].split(',')[0]
@@ -140,31 +113,6 @@ def find_id(str_checkout, type_val):
         tap_menu = db_models.Menu(**taps['menu'])
         found_beer = tap_menu.find_tap_beer_in_sections(name, brewery)
     return found_beer
-
-
-def find_photo(str_checkout, type_val):
-    # print('find ',str_checkout)
-    # print('find ',type_val)
-    taps = db.taps.find_one({'act_flg':1})
-    bottles = db.bottles.find_one({'act_flg':1})
-    name = str_checkout.split(', Стиль: ')[0]
-    brewery = str_checkout.split(', Стиль: ')[1].split(', Пивоварня: ')[1].split(', ABV')[0]
-    style = str_checkout.split('Стиль: ')[1].split(',')[0]
-    tap_id = ''
-    bot_id = ''
-    if type_val == 'tap':
-        for i in taps['menu']['sections'][0]['items']:
-            # print(i['name'])
-            if i['name'] == name and i['brewery'] == brewery:
-                photo = i['label_image_hd']
-        return photo
-    else:
-        for i in bottles['menu']['sections']:
-            if i['name'] == style:
-                for j in i['items']:
-                    if j['name'] == name and j['brewery'] == brewery:
-                        photo = j['label_image_hd']
-        return photo
 
 
 def checkout_cart(user_data):
